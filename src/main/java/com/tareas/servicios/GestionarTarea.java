@@ -2,7 +2,9 @@ package com.tareas.servicios;
 
 import com.tareas.exception.TareaException;
 import com.tareas.model.Tarea;
+import com.tareas.model.Usuario;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -87,5 +89,29 @@ public class GestionarTarea {
             throw new TareaException("El usuario introducido no existe");
         }
     }
+    
+    public static Collection<Tarea> getTareasPorUsuario(String usuario)throws TareaException{
+        
+        Collection<Tarea> tareas;
+        if(tareasPorUsuario.containsKey(usuario)){
+             tareas = tareasPorUsuario.get(usuario);
+             for(Tarea t : tareas){
+                 System.out.println(t.toString());
+             }
+         }else{
+             throw new TareaException("El usuario introducido no existe");
+         }
+         return tareas;
+    }
 
+    public static Map<String, ArrayList<Tarea>> getTareasPorUsuario() {
+        return tareasPorUsuario;
+    }
+
+    public static void setTareasPorUsuario(Map<String, ArrayList<Tarea>> tareasPorUsuario) {
+        GestionarTarea.tareasPorUsuario = tareasPorUsuario;
+    }
+    
+    
+        
 }

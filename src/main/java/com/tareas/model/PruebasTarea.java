@@ -1,24 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.tareas.model;
 
 import com.tareas.exception.TareaException;
 import com.tareas.servicios.GestionarTarea;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author user
- */
+
 public class PruebasTarea {
 
     public static void main(String[] args) {
@@ -128,6 +120,20 @@ public class PruebasTarea {
             System.out.println(ex.getMessage());
         }
         System.out.println(".................");
-    }
+        
+        //uso del método getTareasPorUsuario (FUNCIONA)
 
+        try {
+            GestionarTarea.getTareasPorUsuario("Juli3");
+        } catch (TareaException ex) {
+            System.out.println(ex.getMessage());
+        }
+        System.out.println(".................");
+        try {
+            GestionarTarea.getTareasPorUsuario("Jsssuli3");
+        } catch (TareaException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
 }

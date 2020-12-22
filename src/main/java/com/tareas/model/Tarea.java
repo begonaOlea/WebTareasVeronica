@@ -5,6 +5,8 @@
  */
 package com.tareas.model;
 
+import java.util.Objects;
+
 /**
  *
  * @author user
@@ -64,6 +66,33 @@ public class Tarea {
     @Override
     public String toString() {
         return "Tarea{" + "descripcion=" + descripcion + ", estado=" + estado + ", prioridad=" + prioridad + ", usuario=" + usuario + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.descripcion);
+        return hash;
+    }
+    
+    //Diremos que dos tareas son IGUALES si tienen la misma DESCRIPCIÓN
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tarea other = (Tarea) obj;
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        return true;
     }
     
     

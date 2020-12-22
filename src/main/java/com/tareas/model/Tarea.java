@@ -26,7 +26,7 @@ public class Tarea {
         this.prioridad = prioridad;
         this.usuario = usuario;
     }
-    
+
     //MÉTODOS
 
     public String getDescripcion() {

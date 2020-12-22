@@ -17,20 +17,24 @@ import java.util.Set;
  */
 public class PruebasTarea {
     public static void main(String[] args) {
-        Map<String, Tarea> tareas = new HashMap<String, Tarea>();
+        Map<String, ArrayList<Tarea>> tareasPorUsuario = new HashMap<String, ArrayList<Tarea>>();
         
-        List<Tarea> listaTareas = new ArrayList<Tarea>();
+        ArrayList<Tarea> listaTareas = new ArrayList< Tarea>();
         
-        tareas.put("laura12", new Tarea("trabajar", "inprogress","alta","laura12"));
-        tareas.put("roberto2", new Tarea("dibujar", "todo","baja","roberto2"));
-        tareas.put("er", new Tarea("fdd", "done","media","roberto2"));
-        tareas.put("alberto34", new Tarea("bail", "inprogress","baja","alberto34"));
+        listaTareas.add(new Tarea("comer", "TODO","alta","Vero21"));
+        listaTareas.add(new Tarea("dormir", "DONE","media","Vero21"));
+        listaTareas.add(new Tarea("ordenar", "INPROGRESS","media","Andoni02"));
+        listaTareas.add(new Tarea("trabajar", "TODO","baja","Juli3"));
+        listaTareas.add(new Tarea("ver pei", "TODO","alta","Juli3"));
         
-        for(Tarea t: tareas.values()){
+        for(Tarea tarea: listaTareas){
+            tareasPorUsuario.put(tarea[3], A);
+        }
+        for(Tarea t: tareasPorUsuario.keySet()){
             System.out.println(t.toString());
         }
         
-        for(String k : tareas.keySet()){
+        for(String k : tareasPorUsuario.keySet()){
             System.out.println(k);
         }
         //System.out.println(".............");

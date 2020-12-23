@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.tareas.model;
 
 import java.util.Objects;
 
-/**
- *
- * @author user
- */
 public class Tarea {
     
     //ATRIBUTOS
@@ -18,11 +10,11 @@ public class Tarea {
     private String descripcion;
     private String estado;  //TODO, INPROGRESS, DONE
     private String prioridad;  //BAJA, MEDIA, ALTA
-    private String usuario;
+    private Usuario usuario;
     
     //CONSTRUCTOR
 
-    public Tarea(String descripcion, String estado, String prioridad, String usuario) {
+    public Tarea(String descripcion, String estado, String prioridad, Usuario usuario) {
         this.descripcion = descripcion;
         this.estado = estado;
         this.prioridad = prioridad;
@@ -55,17 +47,17 @@ public class Tarea {
         this.prioridad = prioridad;
     }
 
-    public String getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
     @Override
     public String toString() {
-        return "Tarea{" + "descripcion=" + descripcion + ", estado=" + estado + ", prioridad=" + prioridad + ", usuario=" + usuario + '}';
+        return "Tarea{" + "descripcion=" + descripcion + ", estado=" + estado + ", prioridad=" + prioridad + ", usuario=" + usuario.toString() + '}';
     }
 
     @Override

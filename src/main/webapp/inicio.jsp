@@ -18,7 +18,7 @@
             <p>Aquí podrás construir tu propia agenda de tareas online ;)</p>
         </div>
         
-        <div class="col-2">
+        <div class="col-12">
         <c:choose >
             <c:when test="${ not empty sessionScope.usuario}">
                 <h5> Usuario:  ${ sessionScope.usuario.nombre}</h5>
@@ -30,7 +30,7 @@
         <div align="center"><img src="img/escribiendo.gif" alt="escribiendo"></div>
         
         <div class="d-flex flex-row justify-content-center alig-items-center">
-            <%@include file="WEB-INF/vista/navegacion.jspf" %>
+            <%@include file="WEB-INF/vista/navegacionInicio.jspf" %>
         </div>
         
     </body>

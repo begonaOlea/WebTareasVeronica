@@ -13,12 +13,12 @@
     </head>
     <body>
         <div class="container p-3 my-3 bg-info text-white">
-            <h1>Acceso a tus tareas</h1>
+            <h1>Iniciar sesión</h1>
         </div>
         <div class="container">
 
-            <%@include file="WEB-INF/vista/navegacion.jspf" %>
-
+            <%@include file="WEB-INF/vista/navegacionLogin.jspf" %>
+        </div>
             <div class="row">
                 <div class="col">
                 </div>
@@ -36,8 +36,7 @@
                            id="pwd" placeholder="******">
                      <div class="col">${ requestScope.msgErrorPassword }</div>
                 </div>
-                <div class="container">
-                    <a href="alta-usuario.jsp" class="btn btn-primary">Registrarse </a>                
+                <div class="container">              
                     <button type="submit" class="btn btn-primary">Log in</button>
                 </div>
             </form>

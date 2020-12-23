@@ -2,13 +2,14 @@
     <div class="col-12">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" href="inicio.jsp">Inicio</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="login.jsp">Iniciar sesión</a>
             </li>
              <li class="nav-item">
                 <a class="nav-link" href="alta-usuario.jsp">Registrarse</a>
+            </li>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="gestion-tareas.jsp">Añadir tarea</a>
             </li>
         </ul>
     </div>

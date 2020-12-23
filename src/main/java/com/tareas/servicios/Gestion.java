@@ -7,12 +7,15 @@ import com.tareas.model.Usuario;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Gestion {
 
     private static Map<String, ArrayList<Tarea>> tareasPorUsuario;
     private static ArrayList<Tarea> listaTareas;
+    private static Set<Usuario> usuarios;
 
     private static ArrayList<Tarea> listaTareasVero;
     private static ArrayList<Tarea> listaTareasAndoni;
@@ -22,6 +25,7 @@ public class Gestion {
     static {
         tareasPorUsuario = new HashMap<String, ArrayList<Tarea>>();
         listaTareas = new ArrayList<Tarea>();
+        usuarios = new HashSet<Usuario>();
 
         listaTareasVero = new ArrayList<Tarea>();
         listaTareasAndoni = new ArrayList<Tarea>();
@@ -32,6 +36,11 @@ public class Gestion {
         Usuario usuario2 = new Usuario("Andoni02","02");
         Usuario usuario3 = new Usuario("juli3","3");
         Usuario usuario4 = new Usuario("carlos33","33");
+        
+        usuarios.add(usuario1);
+        usuarios.add(usuario2);
+        usuarios.add(usuario3);
+        usuarios.add(usuario4);
 
         listaTareasVero.add(new Tarea("comer", "TODO", "alta", usuario1));
         listaTareasVero.add(new Tarea("dormir", "DONE", "media", usuario1));
@@ -71,6 +80,11 @@ public class Gestion {
         }
         
     }
+
+    public static Set<Usuario> getUsuarios() {
+        return usuarios;
+    }
+    
     
     public static void addTarea(Usuario usuario, Tarea tarea) throws TareaException, UsuarioException{
 

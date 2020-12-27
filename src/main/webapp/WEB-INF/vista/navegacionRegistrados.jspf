@@ -19,12 +19,3 @@
         </li>
     </ul>
 </div>
-<div class="enlaces" >
-    <ul class="nav">
-
-        <li class="nav-item">
-            <a class="nav-link" href="form-alta-usuario.jsp">Registrarse</a>
-        </li>
-    </ul>
-
-</div>

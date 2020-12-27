@@ -1,10 +1,10 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Log in</title>
+        <title>Formulario</title>
         <%@include file="WEB-INF/vista/estilos.jspf" %>
 
     </head>
@@ -51,50 +51,39 @@
 
     </style>
     <body>
-
         <div class="transbox">
-
-
             <div class="row">
                 <div class="col">
-                    <a class="nav-link" href="index.jsp">Volver a inicio</a>
-                    <h1>Iniciar sesión</h1>
+                    <a class="nav-link" href="tareasUsuario.jsp">Volver a mis tareas</a>
+                    <h1>Formulario para registrar la tarea</h1>
 
                 </div>
             </div>
-            
-            <c:if test="${not empty requestScope.msgErrorLogin }" >
-                <div class="alert alert-success" role="alert">
-                    ${requestScope.msgErrorLogin}
-                </div>
-            </c:if>
-                
             <div class="container">
                 <div class="abs-center">
-                    <form action="login" method="post" >
+
+                    <form action="AltaNuevaTarea" method="post" >
                         <div class="form-group">
-                            <label for="nombre">Nombre de usuario</label>
-                            <input type="nombre" class="form-control" name="nombre"
-                                   id="nombre" placeholder="Ej:Vero21">
-                            <div class="col">${ requestScope.msgErrorNombre }</div>
+                            <label for="descripcion">Descripción de la tarea</label>
+                            <input type="descripcion" class="form-control" name="descripcion"
+                                   id="descripcion" placeholder="Estudiar Java">
+                            <div class="col">${ requestScope.msgErrorDescrip }</div>
                         </div>
                         <div class="form-group">
-                            <label for="pwd">Contraseña</label>
-                            <input type="password" class="form-control" name="pwd"
-                                   id="pwd" placeholder="Contraseña">
-                            <div class="col">${ requestScope.msgErrorPwd }</div>
+                            <label for="prioridad">Prioridad</label>
+                            <input type="prioridad" class="form-control" name="prioridad"
+                                   id="prioridad" placeholder="Alta">
+                            <div class="col">${ requestScope.msgErrorPrioridad }</div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Log in</button>
+
+                        <button type="submit" class="btn btn-primary">Aceptar</button>
 
                     </form>
-
                 </div>
             </div>
-
         </div>
-
     </body>
-
 </html>
+
 

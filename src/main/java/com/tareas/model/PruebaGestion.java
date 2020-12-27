@@ -1,5 +1,6 @@
-package com.tareas.servicios;
+package com.tareas.model;
 
+import com.tareas.model.Gestion;
 import com.tareas.exception.TareaException;
 import com.tareas.exception.UsuarioException;
 import com.tareas.model.Tarea;
@@ -7,12 +8,10 @@ import com.tareas.model.Usuario;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PruebaGestion {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TareaException {
 
         Map<String, ArrayList<Tarea>> mapInicial = Gestion.getTareasPorUsuario();
 
@@ -132,15 +131,15 @@ public class PruebaGestion {
         } catch (UsuarioException ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         System.out.println(".....ELIMINAMOS EL USUARIO Carlos33....");
-        
+
         try {
             Gestion.eliminarUsuario(new Usuario("Carlos33", "33"));
         } catch (UsuarioException ex) {
             System.out.println(ex.getMessage());
         }
-        
+
         //Ver keys de mapInicial
         System.out.println(".......CLAVES......");
         for (String key : mapInicial.keySet()) {
@@ -155,7 +154,18 @@ public class PruebaGestion {
         System.out.println(".................");
         System.out.println(".................");
 
-    }
-    
+        System.out.println(".....VEMOS TAREAS TODO DE USUARIO Vero21....");
 
+        Collection<Tarea> tareasTODOvero;
+        try {
+            tareasTODOvero = Gestion.getTareasPorUsuarioYEstado(new Usuario("Vero21", "21"), "TODO");
+            for (Tarea t : tareasTODOvero) {
+                System.out.println(t.toString());
+            }
+        } catch (UsuarioException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+
+    }
 }

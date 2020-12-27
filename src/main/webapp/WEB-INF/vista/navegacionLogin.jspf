@@ -1,8 +1,31 @@
-<div class="row">
-    <div class="col-12">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="inicio.jsp">Inicio</a>
-            </li>
-    </div>
+
+<style>
+    div.enlaces {
+        text-align: center;
+        float: inside;
+        background-color: #ffffff;
+        color:black;
+        display: inline-block;
+
+    }
+    
+</style>
+
+<div class="enlaces" >
+
+    <ul class="nav">
+
+        <li class="nav-item">
+            <a class="nav-link" href="logout">Log out</a>
+        </li>
+    </ul>
+</div>
+<div class="enlaces" >
+    <ul class="nav">
+
+        <li class="nav-item">
+            <a class="nav-link" href="tareasUsuario.jsp">Mis tareas</a>
+        </li>
+    </ul>
+
 </div>

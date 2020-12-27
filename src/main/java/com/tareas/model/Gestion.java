@@ -1,4 +1,4 @@
-package com.tareas.servicios;
+package com.tareas.model;
 
 import com.tareas.exception.TareaException;
 import com.tareas.exception.UsuarioException;
@@ -21,7 +21,7 @@ public class Gestion {
     private static ArrayList<Tarea> listaTareasAndoni;
     private static ArrayList<Tarea> listaTareasJuli;
     private static ArrayList<Tarea> listaTareasCarlos;
-    
+
     static {
         tareasPorUsuario = new HashMap<String, ArrayList<Tarea>>();
         listaTareas = new ArrayList<Tarea>();
@@ -31,12 +31,12 @@ public class Gestion {
         listaTareasAndoni = new ArrayList<Tarea>();
         listaTareasJuli = new ArrayList<Tarea>();
         listaTareasCarlos = new ArrayList<Tarea>();
-        
-        Usuario usuario1 = new Usuario("Vero21","21");
-        Usuario usuario2 = new Usuario("Andoni02","02");
-        Usuario usuario3 = new Usuario("juli3","3");
-        Usuario usuario4 = new Usuario("carlos33","33");
-        
+
+        Usuario usuario1 = new Usuario("Vero21", "21");
+        Usuario usuario2 = new Usuario("Andoni02", "02");
+        Usuario usuario3 = new Usuario("Juli3", "3");
+        Usuario usuario4 = new Usuario("Carlos33", "33");
+
         usuarios.add(usuario1);
         usuarios.add(usuario2);
         usuarios.add(usuario3);
@@ -53,43 +53,51 @@ public class Gestion {
         tareasPorUsuario.put("Juli3", listaTareasJuli);
         tareasPorUsuario.put("Carlos33", listaTareasCarlos);
     }
-    
-     private Gestion() {
+
+    private Gestion() {
     }
-    
+
     //CON ESTA CLASE SE GESTIONAN TAREAS Y USUARIOS
-     
     public static Map<String, ArrayList<Tarea>> getTareasPorUsuario() {
         return tareasPorUsuario;
     }
-     
-    public static void addUsuario(Usuario usuario) throws UsuarioException{
-        if(tareasPorUsuario.containsKey(usuario.getNombre())){
+
+    /*
+    public static void addUsuario(Usuario usuario) throws UsuarioException {
+        if (tareasPorUsuario.containsKey(usuario.getNombre())) {
             throw new UsuarioException("El usuario introducido ya existe");
-        }else{
+        } else {
             tareasPorUsuario.put(usuario.getNombre(), listaTareas);
         }
     }
-    
-    public static void eliminarUsuario(Usuario usuario) throws UsuarioException{
-        
+     */
+    public static void addUsuario(Usuario usuario) throws UsuarioException {
+        if (usuarios.contains(usuario)) {
+            throw new UsuarioException("El usuario introducido ya existe");
+        } else {
+            usuarios.add(usuario);
+            tareasPorUsuario.put(usuario.getNombre(), listaTareas);
+        }
+
+    }
+
+    public static void eliminarUsuario(Usuario usuario) throws UsuarioException {
+
         if (tareasPorUsuario.containsKey(usuario.getNombre())) {
             tareasPorUsuario.remove(usuario.getNombre());
         } else {
             throw new UsuarioException("El usuario introducido no existe");
         }
-        
+
     }
 
     public static Set<Usuario> getUsuarios() {
         return usuarios;
     }
-    
-    
-    public static void addTarea(Usuario usuario, Tarea tarea) throws TareaException, UsuarioException{
+
+    public static void addTarea(Usuario usuario, Tarea tarea) throws TareaException, UsuarioException {
 
         //falta meter el equals... para que no añada una tarea que ya existe
-        
         if (tareasPorUsuario.containsKey(usuario.getNombre())) {
             tareasPorUsuario.get(usuario.getNombre()).add(tarea);
         } else {
@@ -97,44 +105,66 @@ public class Gestion {
         }
 
     }
-    
+
     public static void eliminarTarea(Usuario usuario, Tarea tarea) throws TareaException, UsuarioException {
 
         if (tareasPorUsuario.containsKey(usuario.getNombre())) {
-            if(tareasPorUsuario.get(usuario.getNombre()).contains(tarea)){
+            if (tareasPorUsuario.get(usuario.getNombre()).contains(tarea)) {
                 tareasPorUsuario.get(usuario.getNombre()).remove(tarea);
-            }else{
+            } else {
                 throw new TareaException("La tarea introducida no existe");
             }
         } else {
             throw new UsuarioException("El usuario introducido no existe");
         }
     }
-    
-    public static void cambiarEstado(Usuario usuario, Tarea tarea, String estado) throws TareaException, UsuarioException{
+
+    public static void cambiarEstado(Usuario usuario, Tarea tarea, String estado) throws TareaException, UsuarioException {
 
         if (tareasPorUsuario.containsKey(usuario.getNombre())) {
+            boolean encontrado = false;
             for (Tarea t : tareasPorUsuario.get(usuario.getNombre())) {
                 if (t.equals(tarea)) {
                     t.setEstado(estado);
-                } else {
-                    throw new TareaException("La tarea introducida no existe");
+                    encontrado = true;
                 }
+            }
+            if (!encontrado) {
+                throw new TareaException("La tarea introducida no existe");
+
             }
         } else {
             throw new UsuarioException("El usuario introducido no existe");
         }
     }
-    
-    public static Collection<Tarea> getTareasPorUsuario(Usuario usuario)throws UsuarioException{
-        
+
+    public static Collection<Tarea> getTareasPorUsuario(Usuario usuario) throws UsuarioException {
+
         Collection<Tarea> tareas;
-        if(tareasPorUsuario.containsKey(usuario.getNombre())){
-             tareas = tareasPorUsuario.get(usuario.getNombre());
-             
-         }else{
-             throw new UsuarioException("El usuario introducido no existe");
-         }
-         return tareas;
+        if (tareasPorUsuario.containsKey(usuario.getNombre())) {
+            tareas = tareasPorUsuario.get(usuario.getNombre());
+
+        } else {
+            throw new UsuarioException("El usuario introducido no existe");
+        }
+        return tareas;
+    }
+
+    public static Collection<Tarea> getTareasPorUsuarioYEstado(Usuario usuario, String estado) throws UsuarioException {
+
+        Collection<Tarea> tareasSeleccionadas = new ArrayList<Tarea>();
+        Collection<Tarea> tareas;
+
+        if (tareasPorUsuario.containsKey(usuario.getNombre())) {
+            tareas = tareasPorUsuario.get(usuario.getNombre());
+            for (Tarea tarea : tareas) {
+                if (tarea.getEstado().equals(estado)) {
+                    tareasSeleccionadas.add(tarea);
+                }
+            }
+        } else {
+            throw new UsuarioException("El usuario introducido no existe");
+        }
+        return tareasSeleccionadas;
     }
 }

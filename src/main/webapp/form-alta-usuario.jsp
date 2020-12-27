@@ -1,13 +1,15 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Log in</title>
+        <title>Registrarse</title>
         <%@include file="WEB-INF/vista/estilos.jspf" %>
-
     </head>
+
     <style>
         body  {
             background-image: url("imgs/imgInicio.jpg");
@@ -47,54 +49,59 @@
 
 
         }
-
+       
 
     </style>
-    <body>
 
+    <body>
         <div class="transbox">
 
 
             <div class="row">
                 <div class="col">
                     <a class="nav-link" href="index.jsp">Volver a inicio</a>
-                    <h1>Iniciar sesión</h1>
+                    <h1>Formulario de registro</h1>
 
                 </div>
             </div>
-            
-            <c:if test="${not empty requestScope.msgErrorLogin }" >
+
+            <!-- mensaje error alta -->
+            <c:if test="${not empty requestScope.msgErrorAlta }" >
                 <div class="alert alert-success" role="alert">
-                    ${requestScope.msgErrorLogin}
+                    ${requestScope.msgErrorAlta}
                 </div>
             </c:if>
-                
+
+
+            <!--  formulario  -->
+
+
             <div class="container">
                 <div class="abs-center">
-                    <form action="login" method="post" >
+                    <form action="alta-nuevo-usuario" method="post">
                         <div class="form-group">
-                            <label for="nombre">Nombre de usuario</label>
-                            <input type="nombre" class="form-control" name="nombre"
-                                   id="nombre" placeholder="Ej:Vero21">
-                            <div class="col">${ requestScope.msgErrorNombre }</div>
+                            <label>Nombre de usuario:</label>
+                            <input type="nombre" class="form-control" id="nombre" 
+                                   placeholder="Introduce un nombre" name="nombre">
                         </div>
+                        <div class="col">${ requestScope.msgErrorNombre }</div>
+
+
                         <div class="form-group">
-                            <label for="pwd">Contraseña</label>
-                            <input type="password" class="form-control" name="pwd"
-                                   id="pwd" placeholder="Contraseña">
-                            <div class="col">${ requestScope.msgErrorPwd }</div>
+                            <label>Contraseña:</label>
+                            <input type="password" class="form-control" id="pwd" 
+                                   placeholder="Introduce la contraseña" name="pwd">
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Log in</button>
-
-                    </form>
-
+                        <div class="col">${ requestScope.msgErrorPwd }</div>
                 </div>
+                
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+              
+                </form> 
             </div>
-
         </div>
 
-    </body>
 
+    </body>
 </html>
 

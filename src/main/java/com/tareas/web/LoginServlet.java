@@ -6,55 +6,56 @@ import com.tareas.servicios.ServicioLogin;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 
-   @Override
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        
-        //LEER PARAMETROS
-        String nombreUsuario = req.getParameter("usuario");
-        String password = req.getParameter("password");
+        String paramNombre = req.getParameter("nombre");
+        String paramPwd = req.getParameter("pwd");
         
-        //VALIDAR
-        String msgErrorUsuario = null;
-        String msgErrorPassword = null;
+        String msgErrorNombre = null;
+        String msgErrorPwd = null;
         String msgErrorLogin = null;
         
         
-          boolean ok = true;
+          boolean valido = true;
 
-        if (nombreUsuario == null || nombreUsuario.trim().length() == 0) {
-            msgErrorUsuario = "Debe introducir el nombre del usuario";
-            ok = false;
+        if (paramNombre == null || paramNombre.trim().length() == 0) {
+            msgErrorNombre = "Debe indicar el nombre del usuario";
+            valido = false;
         }
-     
-        if (password == null || password.trim().length() == 0) {
-            msgErrorPassword = "Debe introducir la contraseña";
-            ok = false;
+      
+        if (paramPwd == null || paramPwd.trim().length() == 0) {
+            msgErrorPwd = "Debe indicar una clave";
+            valido = false;
         }
-        if(ok){
+        if(valido){
             try {
                 HttpSession sesion = req.getSession();
                 ServicioLogin servicio = new ServicioLogin();
-                servicio.login(nombreUsuario, password, sesion);
+                servicio.login(paramNombre, paramPwd, sesion);
             } catch (LoginException ex) {
                 msgErrorLogin = ex.getMessage();
-                ok = false;
+                valido = false;
             }
         }
-        
-        String jspAMostrar = "";
-        if (ok) {
-            jspAMostrar = "inicio.jsp";
+       
+     String jspAMostrar = "";
+        if (valido) {
+            jspAMostrar = "indexLogeados.jsp";
         } else {
             jspAMostrar = "login.jsp";
-            req.setAttribute("msgErrorUsuario", msgErrorUsuario);
-            req.setAttribute("msgErrorPassword", msgErrorPassword);
+            req.setAttribute("msgErrorEmail", msgErrorNombre);
+            req.setAttribute("msgErrorPwd", msgErrorPwd);
             req.setAttribute("msgErrorLogin", msgErrorLogin);
         }
         
@@ -63,5 +64,4 @@ public class LoginServlet extends HttpServlet {
     }//fin post
    
 }
-
 

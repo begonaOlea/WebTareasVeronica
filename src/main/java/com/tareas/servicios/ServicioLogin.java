@@ -1,15 +1,17 @@
 package com.tareas.servicios;
 
 import com.tareas.exception.LoginException;
+import com.tareas.model.Gestion;
 import com.tareas.model.Usuario;
 import java.util.Collection;
 import javax.servlet.http.HttpSession;
 
 public class ServicioLogin {
 
-    public void login(String nombreUsuario, String password, HttpSession sesion) throws LoginException {
+    public void login(String nombreUsuario, String clave, HttpSession sesion) throws LoginException {
         
         Collection<Usuario> usuarios = Gestion.getUsuarios();
+        
         Usuario usrEncontrado = null;
         
         for (Usuario u : usuarios) {
@@ -18,15 +20,19 @@ public class ServicioLogin {
                 break;
             }
         }
-   
+        
         if (usrEncontrado == null) {
             throw new LoginException("El usuario no existe. Debe registrarse.");
         }else{
-            if(usrEncontrado.getPassword().equals(password)){
-                //añadir a sesion
+            
+            if(usrEncontrado.getPassword().equals(clave)){
+                
                 sesion.setAttribute("usuario", usrEncontrado);
+                sesion.setAttribute("nombre", usrEncontrado.getNombre());
+                sesion.setAttribute("psw", usrEncontrado.getPassword());
+                
             }else{
-                throw new LoginException("Contraseña no válida");
+                throw new LoginException("Clave no válida");
             }
         }
         
@@ -37,3 +43,4 @@ public class ServicioLogin {
     }//fin logout
 
 }
+

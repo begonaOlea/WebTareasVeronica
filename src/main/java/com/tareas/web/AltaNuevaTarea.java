@@ -1,4 +1,3 @@
-
 package com.tareas.web;
 
 import com.tareas.exception.TareaException;
@@ -14,17 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 public class AltaNuevaTarea extends HttpServlet {
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
+        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("utf-8");
+
         String paramDescripcion = request.getParameter("descripcion");
         String paramPrioridad = request.getParameter("prioridad");
-       
 
         String msgErrorPrioridad = null;
         String msgErrorDescrip = null;
@@ -32,7 +32,6 @@ public class AltaNuevaTarea extends HttpServlet {
 
         boolean valido = true;
 
-         
         if (paramDescripcion == null || paramDescripcion.trim().length() == 0) {
             msgErrorDescrip = "Debe indicar la descripción de la tarea";
             valido = false;
@@ -43,25 +42,24 @@ public class AltaNuevaTarea extends HttpServlet {
             valido = false;
         }
 
-        
         if (valido) {
-            
+
             HttpSession sesion = request.getSession();
             String nombreUsuario = (String) sesion.getAttribute("nombre");
             String clave = (String) sesion.getAttribute("psw");
-            Usuario u = new Usuario(nombreUsuario,clave);
-            
-            Tarea tarea = new Tarea(paramDescripcion,"TODO",paramPrioridad,u);
+            Usuario u = new Usuario(nombreUsuario, clave);
+
+            Tarea tarea = new Tarea(paramDescripcion, "TODO", paramPrioridad, u);
             try {
                 Gestion.addTarea(u, tarea);
             } catch (TareaException e) {
                 msgErrorAlta = e.getMessage();
-                valido = false;               
+                valido = false;
             } catch (UsuarioException ex) {
                 valido = false;
             }
         }
-        
+
         String jspAMostrar = "";
         if (valido) {
             jspAMostrar = "tareasUsuario.jsp";
@@ -71,12 +69,10 @@ public class AltaNuevaTarea extends HttpServlet {
             request.setAttribute("msgErrorDescrip", msgErrorDescrip);
             request.setAttribute("msgErrorAlta", msgErrorAlta);
         }
-        
+
         RequestDispatcher rd = request.getRequestDispatcher(jspAMostrar);
         //rd.forward(request, response);
         response.sendRedirect(jspAMostrar);
     }
-
-    
 
 }
